@@ -30,20 +30,33 @@ fn main() {
         n += 1;
     }
 
+    // clone crates for part 2
+    let mut part2: Vec<VecDeque<char>> = crates.clone();
+
     // read and perform instructions
     for l in inp_data.trim().lines().skip(n + 2) {
         let instr: Vec<usize> = l.split(" ").skip(1).step_by(2).map(|x| x.parse::<usize>().unwrap()).collect();
 
+        let mut v: VecDeque<char> = VecDeque::new();
+
         for _ in 0..instr[0] {
+            // part 1
             let x = crates[instr[1] - 1].pop_back();
             crates[instr[2] - 1].push_back(x.unwrap());
+
+            // part 2
+            let y = part2[instr[1] - 1].pop_back();
+            v.push_front(y.unwrap());
         }
+
+        // part 2 append vector
+        part2[instr[2] - 1].append(&mut v);
+        
     }
 
     // print answer
-    for i in crates.iter() {
-        print!("{}", i.back().unwrap());
-    }
-    println!();
+
+    println!("{}", crates.iter().map(|x| x.back().unwrap()).collect::<String>());
+    println!("{}", part2.iter().map(|x| x.back().unwrap()).collect::<String>());
 
 }
