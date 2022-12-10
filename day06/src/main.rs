@@ -17,5 +17,15 @@ fn main() {
         .map(|x| x + 4)
         .unwrap();
 
+    let part2: usize = inp_data
+        .trim()
+        .chars()
+        .collect::<Vec<char>>()
+        .windows(14)
+        .position(|x| x.iter().all_unique())
+        .map(|x| x + 14)
+        .unwrap();
+
     println!("{}", part1);
+    println!("{}", part2);
 }
