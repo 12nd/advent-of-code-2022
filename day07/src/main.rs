@@ -38,5 +38,9 @@ fn main() {
     }
 
     // part 1
-    println!("{}", folders.values().filter(|x| *x <= &100000).sum::<usize>());
+    println!("{}", folders.values().filter(|x| **x <= 100000).sum::<usize>());
+
+    // part 2
+    let req_space: usize = 30000000 - (70000000 - folders["//"]); // root directory is "//"
+    println!("{}", folders.values().filter(|x| **x >= req_space).min().unwrap())
 }
